@@ -15,6 +15,8 @@ import SwiftyJSON
 
 class HomeViewController: UIViewController, SkeletonDisplayable {
     
+    
+    
     let searchBar = UISearchBar()
     let tableview = UITableView()
     var refreshControl: UIRefreshControl!
