@@ -1,2 +1,2 @@
 # WeatherApp
-Opeen Weather Map API
+Open Weather API
