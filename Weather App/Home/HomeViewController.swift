@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, SkeletonDisplayable {
     var refreshControl: UIRefreshControl!
     let locationManager = CLLocationManager()
     var locVal: CLLocationCoordinate2D!
-    var oldLocation:CLLocation? //  = CLLocation(latitude: 0, longitude: 0)
+    var oldLocation:CLLocation? 
 
     var citiesJson = [City]()
     var resultArr = [City]()
