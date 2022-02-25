@@ -35,7 +35,7 @@ class HomeViewController: UIViewController, SkeletonDisplayable {
     let type = "metric"
     var lon: Double = 0.0
     var lat: Double = 0.0
-    var cityName: String = ""
+    var cityName: String = "City Name"
     let extrow = 3
     
     let bgColor = UIColor(red: 52/256, green: 109/256, blue: 179/256, alpha: 1)

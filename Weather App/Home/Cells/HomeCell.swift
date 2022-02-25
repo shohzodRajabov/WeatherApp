@@ -68,7 +68,7 @@ class HomeCell: UITableViewCell {
     }
     
     func initCityName(_ city: String) {
-        self.locationLbl.text = city 
+        self.locationLbl.text = city
     }
     
     func initDatas(_ fullWeather: WeatherFull?){
