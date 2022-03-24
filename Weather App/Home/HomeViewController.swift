@@ -69,7 +69,11 @@ class HomeViewController: UIViewController, SkeletonDisplayable {
     
     
     @objc func refresh(_ sender: Any) {
-        refreshControl.endRefreshing()
+        if let location = oldLocation{
+            getInfo(lon: location.coordinate.longitude, lat: location.coordinate.latitude)
+        } else{
+            refreshControl.endRefreshing()
+        }
     }
     
 }
@@ -141,8 +145,9 @@ extension HomeViewController {
     func initSubviews() {
         
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "loading...")
+        refreshControl.attributedTitle = NSAttributedString(string: "loading...", attributes: [.foregroundColor: UIColor.white])
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = .white
     
         tableview.addSubview(refreshControl)
         tableview.delegate = self
@@ -218,8 +223,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "HourlyCell") as! HourlyCell
           
             cell.backgroundColor = .clear
-            let q:[Hourly] = [Hourly.init(isCustom: true),Hourly.init(isCustom: true),Hourly.init(isCustom: true)]
-            cell.items = fullWeather?.hourly ?? q
+//            let q:[Hourly] = [Hourly.init(isCustom: true),Hourly.init(isCustom: true),Hourly.init(isCustom: true)]
+            cell.items = fullWeather?.hourly ?? [Hourly]()
             cell.timezone = fullWeather?.timezone_offset ?? 0
             cell.selectionStyle = .none
             return cell
@@ -328,12 +333,11 @@ extension HomeViewController {
         let requestId =  makeIdentifier()
         let request = AF.request(urlString, parameters: parameters).responseJSON { response in
             ProgressHUD.dismiss()
-            
+            self.refreshControl.endRefreshing()
             if let responseData = response.data{
                 do {
                     if let json = try JSONSerialization.jsonObject(with: responseData, options: .allowFragments) as? [String:AnyObject]{
-                        let obj = WeatherFull.init(json)
-                        self.fullWeather = obj
+                        self.fullWeather = WeatherFull.init(json)
                         self.tableview.reloadData()
                         DispatchQueue.main.async {
                             self.hideSkeleton()

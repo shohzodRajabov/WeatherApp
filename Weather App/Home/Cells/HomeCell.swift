@@ -76,7 +76,7 @@ class HomeCell: UITableViewCell {
             self.icon.image = UIImage(named: fullWeather?.current?.weather[0].icon ?? "")?.withAlignmentRectInsets(UIEdgeInsets(top: -12, left: 15, bottom: -12, right: 15))
             self.statusLbl.text = fullWeather?.current?.weather[0].main ?? "Clear"
         }
-        self.temperatureLbl.text = String(fullWeather?.current?.temp ?? 00.00) + " ℃"
+        self.temperatureLbl.text = String(fullWeather?.current?.temp ?? 0.0) + " ℃"
     }
 
 }

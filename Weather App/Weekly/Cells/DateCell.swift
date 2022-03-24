@@ -77,9 +77,9 @@ class DateCell: UITableViewCell {
             dateFormatter.doesRelativeDateFormatting = false
             var date = Date(timeIntervalSince1970: fullWeather?.daily[section].sunrise ?? 0)
             self.topLeftItem.valLbl.text = String(dateFormatter.string(from: date))
-            date = Date(timeIntervalSince1970: fullWeather?.daily[section].sunset ?? 0)
-            self.bottomLeftItem.valLbl.text =  String(dateFormatter.string(from: date))
             date = Date(timeIntervalSince1970: fullWeather?.daily[section].moonrise ?? 0)
+            self.bottomLeftItem.valLbl.text =  String(dateFormatter.string(from: date))
+            date = Date(timeIntervalSince1970: fullWeather?.daily[section].sunset ?? 0)
             self.topRightItem.valLbl.text =  String(dateFormatter.string(from: date))
             date = Date(timeIntervalSince1970: fullWeather?.daily[section].moonset ?? 0)
             self.bottomRightItem.valLbl.text =  String(dateFormatter.string(from: date))
